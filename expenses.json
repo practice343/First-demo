@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "description": "School fee",
+    "amount": 300000.0,
+    "category": "Education",
+    "date": "2025-09-03"
+  },
+  {
+    "id": 2,
+    "description": "Hospital",
+    "amount": 20000.0,
+    "category": "Healthcare",
+    "date": "2025-09-03"
+  },
+  {
+    "id": 3,
+    "description": "scooty",
+    "amount": 2000.0,
+    "category": "Transportation",
+    "date": "2025-09-03"
+  },
+  {
+    "id": 5,
+    "description": "Bus",
+    "amount": 1200.0,
+    "category": "Transportation",
+    "date": "2025-09-03"
+  },
+  {
+    "id": 6,
+    "description": "Movie",
+    "amount": 1000.0,
+    "category": "Entertainment",
+    "date": "2025-09-03"
+  },
+  {
+    "id": 6,
+    "description": "Car",
+    "amount": 50000.0,
+    "category": "Transportation",
+    "date": "2025-09-03"
+  }
+]
