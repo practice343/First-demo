@@ -1,0 +1,68 @@
+name: Build and Deploy to GCP
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
+  GKE_ZONE: ${{ secrets.GKE_ZONE }}
+  REGION: us-central1
+  REPOSITORY: expense-tracker
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Google Auth
+      id: auth
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+
+    - name: Configure Docker
+      run: gcloud auth configure-docker $REGION-docker.pkg.dev
+
+    - name: Build Docker image
+      run: |
+        docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/expense-tracker:${{ github.sha }} .
+        docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/expense-tracker:latest .
+
+    - name: Push Docker image
+      run: |
+        docker push $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/expense-tracker:${{ github.sha }}
+        docker push $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/expense-tracker:latest
+
+    - name: Get GKE credentials
+      run: gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE
+
+    - name: Deploy to GKE
+      run: |
+        # Update image in deployment
+        sed -i "s|gcr.io/PROJECT_ID/expense-tracker:latest|$REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/expense-tracker:${{ github.sha }}|g" k8s/deployment.yaml
+        
+        # Apply Kubernetes manifests
+        kubectl apply -f k8s/deployment.yaml
+        kubectl apply -f k8s/service.yaml
+        
+        # Wait for deployment to be ready
+        kubectl rollout status deployment/expense-tracker --timeout=300s
+
+    - name: Get Service URL
+      run: |
+        echo "Waiting for external IP..."
+        kubectl get service expense-tracker --watch

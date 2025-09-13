@@ -1,44 +1,58 @@
 [
   {
     "id": 1,
-    "description": "School fee",
-    "amount": 300000.0,
-    "category": "Education",
-    "date": "2025-09-03"
+    "description": "hehe",
+    "amount": 999.0,
+    "category": "Bills",
+    "date": "2025-09-12"
   },
   {
     "id": 2,
-    "description": "Hospital",
-    "amount": 20000.0,
-    "category": "Healthcare",
-    "date": "2025-09-03"
+    "description": "soso",
+    "amount": 888.0,
+    "category": "Food",
+    "date": "2025-09-13"
   },
   {
     "id": 3,
-    "description": "scooty",
-    "amount": 2000.0,
+    "description": "nono",
+    "amount": 898.0,
     "category": "Transportation",
-    "date": "2025-09-03"
+    "date": "2025-09-12"
+  },
+  {
+    "id": 4,
+    "description": "baba",
+    "amount": 959.0,
+    "category": "Shopping",
+    "date": "2025-09-13"
   },
   {
     "id": 5,
-    "description": "Bus",
-    "amount": 1200.0,
-    "category": "Transportation",
-    "date": "2025-09-03"
+    "description": "lolo",
+    "amount": 879.0,
+    "category": "Healthcare",
+    "date": "2025-09-12"
   },
   {
     "id": 6,
-    "description": "Movie",
-    "amount": 1000.0,
+    "description": "gogo",
+    "amount": 890.0,
+    "category": "Education",
+    "date": "2025-09-13"
+  },
+  {
+    "id": 7,
+    "description": "other",
+    "amount": 888.0,
+    "category": "Other",
+    "date": "2025-09-12"
+  },
+  {
+    "id": 8,
+    "description": "eeee",
+    "amount": 880.0,
     "category": "Entertainment",
-    "date": "2025-09-03"
-  },
-  {
-    "id": 6,
-    "description": "Car",
-    "amount": 50000.0,
-    "category": "Transportation",
-    "date": "2025-09-03"
+    "date": "2025-09-12"
   }
 ]

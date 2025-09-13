@@ -31,6 +31,7 @@ A comprehensive and user-friendly expense tracking application built with Python
 - Bills
 - Healthcare
 - Education
+- Unwanted 
 - Other
 
 ## 🚀 Installation & Setup
